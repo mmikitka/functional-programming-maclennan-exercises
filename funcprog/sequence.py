@@ -58,3 +58,17 @@ def lsubst(T, y, S):
             return core.prefix(core.first(S), lsubst(T, y, core.rest(S)))
         else:
             return S
+
+def add(S):
+    """ Sum all elements of a sequence (Section 3.4) """
+    if not S or not len(S):
+        return 0
+    else:
+        return core.first(S) + add(core.rest(S))
+
+def prod(S):
+    """ Multiply all elements of a sequence (Exercise 3.34) """
+    if not S or not len(S):
+        return 1
+    else:
+        return core.first(S) * prod(core.rest(S))

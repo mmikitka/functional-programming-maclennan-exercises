@@ -33,6 +33,15 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_lsubst(self):
         self.assertEqual(['c', 'o', 'u', 'n', 't', '=', 'c', 'o', 'u', 'n', 't', '+', '1'], sequence.lsubst(['c', 'o', 'u', 'n', 't'], 'x', ['x', '=', 'x', '+', '1']))
 
+    def test_add(self):
+        self.assertEqual(10, sequence.add([0, 1, 2, 3, 4]))
+
+    def test_prod_zero(self):
+        self.assertEqual(0, sequence.prod([0, 1, 2, 3, 4]))
+
+    def test_prod(self):
+        self.assertEqual(24, sequence.prod([1, 2, 3, 4]))
+
 def main():
     unittest.main()
 
