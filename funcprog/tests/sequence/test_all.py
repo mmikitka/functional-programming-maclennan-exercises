@@ -42,6 +42,21 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_prod(self):
         self.assertEqual(24, sequence.prod([1, 2, 3, 4]))
 
+    def test_append_empty(self):
+        self.assertEqual([], sequence.append([]))
+
+    def test_append(self):
+        self.assertEqual(['1', '2', 'a', 'b', 'c', '@', '#'], sequence.append([['1', '2'], ['a', 'b', 'c'], ['@', '#']]))
+
+    def test_seqand_empty(self):
+        self.assertEqual(True, sequence.seqand([]))
+
+    def test_seqand_false(self):
+        self.assertEqual(False, sequence.seqand([['a', 'b'], ['1', '2'], []]))
+
+    def test_seqand_true(self):
+        self.assertEqual(True, sequence.seqand([['a', 'b'], ['1', '2'], ['@', '#']]))
+
 def main():
     unittest.main()
 

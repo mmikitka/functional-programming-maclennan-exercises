@@ -72,3 +72,20 @@ def prod(S):
         return 1
     else:
         return core.first(S) * prod(core.rest(S))
+
+def append(S):
+    """ Cat reduction of a sequence of sequences (Exercise 3.36) """
+    if not S or not len(S):
+        return []
+    else:
+        return cat(core.first(S), append(core.rest(S)))
+
+def seqand(S):
+    """ Return boolean True if all sub-sequences are not nil, False otherwise (Exercise 3.37) """
+    if not S or not len(S):
+        return True
+    else:
+        if not len(core.first(S)):
+            return False
+        else:
+            return seqand(core.rest(S))
