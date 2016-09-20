@@ -10,7 +10,7 @@ def rest(S):
     return []
 
 def first(S):
-    if S and len(S):
+    if S:
         return S[0]
     else:
-        return None
+        return []

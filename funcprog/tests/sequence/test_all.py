@@ -49,13 +49,22 @@ class FuncProgSequenceTestCase(unittest.TestCase):
         self.assertEqual(['1', '2', 'a', 'b', 'c', '@', '#'], sequence.append([['1', '2'], ['a', 'b', 'c'], ['@', '#']]))
 
     def test_seqand_empty(self):
-        self.assertEqual(True, sequence.seqand([]))
+        self.assertEqual([], sequence.seqand([]))
 
     def test_seqand_false(self):
-        self.assertEqual(False, sequence.seqand([['a', 'b'], ['1', '2'], []]))
+        self.assertEqual([], sequence.seqand([['a', 'b'], ['1', '2'], []]))
 
     def test_seqand_true(self):
-        self.assertEqual(True, sequence.seqand([['a', 'b'], ['1', '2'], ['@', '#']]))
+        self.assertEqual(['@', '#'], sequence.seqand([['a', 'b'], ['1', '2'], ['@', '#']]))
+
+    def test_seqor_empty(self):
+        self.assertEqual([], sequence.seqor([]))
+
+    def test_seqor_false(self):
+        self.assertEqual(None, sequence.seqor([[], [], [], None]))
+
+    def test_seqor_true(self):
+        self.assertEqual(['a', 'b'], sequence.seqor([['a', 'b'], [], [], None, ['@', '#']]))
 
 def main():
     unittest.main()

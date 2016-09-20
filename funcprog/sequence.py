@@ -9,20 +9,19 @@ def elt(S, i):
 
 def cat(S, T):
     """ Catenate sequence S with sequence T (Section 3.2) """
-    if not S or not len(S):
+    if not S:
         return T
-    elif not T or not len(T):
+    elif not T:
         return S
     else:
         return core.prefix(core.first(S), cat(core.rest(S), T))
 
 def indsubst(x, i, S):
     """ The indexed substition of x for the ith element of S (Exercise 3.23) """
-    if not len(S) or i == 0:
-        if S:
-            return core.prefix(x, core.rest(S))
-        else:
-            return [x]
+    if not S:
+        return [x]
+    elif i == 0:
+        return core.prefix(x, core.rest(S))
     elif i > 0:
         return core.prefix(core.first(S), indsubst(x, i - 1, core.rest(S)))
 
@@ -61,31 +60,47 @@ def lsubst(T, y, S):
 
 def add(S):
     """ Sum all elements of a sequence (Section 3.4) """
-    if not S or not len(S):
+    if not S:
         return 0
     else:
         return core.first(S) + add(core.rest(S))
 
 def prod(S):
     """ Multiply all elements of a sequence (Exercise 3.34) """
-    if not S or not len(S):
+    if not S:
         return 1
     else:
         return core.first(S) * prod(core.rest(S))
 
 def append(S):
     """ Cat reduction of a sequence of sequences (Exercise 3.36) """
-    if not S or not len(S):
+    if not S:
         return []
     else:
         return cat(core.first(S), append(core.rest(S)))
 
 def seqand(S):
-    """ Return boolean True if all sub-sequences are not nil, False otherwise (Exercise 3.37) """
-    if not S or not len(S):
-        return True
+    """ Return nil upon encountering the first nil in the sequence. Return the last element if all previous values are nil. (Exercise 3.37) """
+    if not S:
+        return []
     else:
-        if not len(core.first(S)):
-            return False
+        if not core.first(S):
+            return []
         else:
-            return seqand(core.rest(S))
+            if len(S) == 1:
+                return core.first(S)
+            else:
+                return seqand(core.rest(S))
+
+def seqor(S):
+    """ Return nil if all elements are nil. Return the first element that is not nil. (Exercise 3.38) """
+    if not S:
+        return []
+    else:
+        if core.first(S):
+            return core.first(S)
+        else:
+            if len(S) == 1:
+                return core.first(S)
+            else:
+                return seqor(core.rest(S))
