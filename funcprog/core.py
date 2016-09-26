@@ -14,3 +14,6 @@ def first(S):
         return S[0]
     else:
         return []
+
+def second(S):
+    return first(rest(S))
