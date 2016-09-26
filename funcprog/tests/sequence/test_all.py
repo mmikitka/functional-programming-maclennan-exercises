@@ -66,6 +66,21 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_seqor_true(self):
         self.assertEqual(['a', 'b'], sequence.seqor([['a', 'b'], [], [], None, ['@', '#']]))
 
+    def test_seqmin_empty(self):
+        self.assertEqual(None, sequence.seqmin([]))
+
+    def test_seqmin(self):
+        self.assertEqual(1, sequence.seqmin([9, 8, 7, 6, 5, 4, 3, 2, 1]))
+
+    def test_sublis_1(self):
+        self.assertEqual(['the', 'mouse', 'in', 'the', 'house'], sequence.sublis([['X', 'mouse'], ['Y', 'house']], ['the', 'X', 'in', 'the', 'Y']))
+
+    def test_sublis_2(self):
+        self.assertEqual(['the', 'cat', 'in', 'the', 'hat'], sequence.sublis([['X', 'cat'], ['Y', 'hat']], ['the', 'X', 'in', 'the', 'Y']))
+
+    def test_subpair(self):
+        self.assertEqual(['2', '12', 'x', '+', '-2', '+', '5', '-', '12'], sequence.subpair(['a', 'b', 'c'], ['12', '-2', '5'], ['2', 'a', 'x', '+', 'b', '+', 'c', '-', 'a']))
+
 def main():
     unittest.main()
 

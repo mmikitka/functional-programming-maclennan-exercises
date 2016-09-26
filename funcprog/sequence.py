@@ -104,3 +104,30 @@ def seqor(S):
                 return core.first(S)
             else:
                 return seqor(core.rest(S))
+
+def seqmin(S):
+    """ Return the minimum value of a sequence (Exercise 3.40) """
+    if not S:
+        return None
+    else:
+        if len(S) == 1:
+            return core.first(S)
+        else:
+            if core.first(S) < core.first(core.rest(S)):
+                return seqmin(core.prefix(core.first(S), core.rest(core.rest(S))))
+            else:
+                return seqmin(core.rest(S))
+
+def sublis(P, S):
+    """ Perform the substition pairs of sequence P on sequence S (Exercise 3.41) """
+    if not S or not P:
+        return S
+    else:
+        return sublis(core.rest(P), subst(core.second(core.first(P)), core.first(core.first(P)), S))
+
+def subpair(X, Y, S):
+    """ Perform pair-wise substition of positional keys in X with positional values in Y on sequence S (Exercise 3.42) """
+    if not X or not Y or not S:
+        return S
+    else:
+        return subpair(core.rest(X), core.rest(Y), subst(core.first(Y), core.first(X), S))
