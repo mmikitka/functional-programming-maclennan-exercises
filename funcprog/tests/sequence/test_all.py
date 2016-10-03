@@ -1,6 +1,7 @@
 import unittest
 import os
 import sys
+import math
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 from funcprog import sequence
@@ -14,6 +15,9 @@ class FuncProgSequenceTestCase(unittest.TestCase):
 
     def test_cat(self):
         self.assertEqual(['a', 'b', 'c', '1', '2', '3'], sequence.cat(['a', 'b', 'c'], ['1', '2', '3']))
+
+    def test_trans2(self):
+        self.assertEqual([['a', '1'], ['b', '2'], ['c', '3']], sequence.trans2(['a', 'b', 'c'], ['1', '2', '3']))
 
     def test_indsubst_within(self):
         self.assertEqual(['a', 'b', 'c'], sequence.indsubst('b', 1, ['a', 'z', 'c']))
@@ -80,6 +84,15 @@ class FuncProgSequenceTestCase(unittest.TestCase):
 
     def test_subpair(self):
         self.assertEqual(['2', '12', 'x', '+', '-2', '+', '5', '-', '12'], sequence.subpair(['a', 'b', 'c'], ['12', '-2', '5'], ['2', 'a', 'x', '+', 'b', '+', 'c', '-', 'a']))
+
+    def test_map_sin(self):
+        self.assertEqual([0.0, 1.0], sequence.map_sin([math.radians(0), math.radians(90)]))
+
+    def test_map_prod(self):
+        self.assertEqual([6, 24, 3, 1, 25], sequence.map_prod([[2, 3], [1, 4, 6], [3], [], [5, 5]]))
+
+    def test_vector_prod(self):
+        self.assertEqual([6, 8, 0], sequence.vector_prod([2, 4, 1], [3, 2, 0]))
 
 def main():
     unittest.main()

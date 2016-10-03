@@ -1,4 +1,5 @@
 from . import core
+import math
 
 def elt(S, i):
     """ Retrieve the ith element of S (Section 3.1) """
@@ -15,6 +16,14 @@ def cat(S, T):
         return S
     else:
         return core.prefix(core.first(S), cat(core.rest(S), T))
+
+def trans2(S, T):
+    """ Join two sequences together, paired by the elements in the same position.
+        It is assumed the length(S) == length(T) (Exercise 3.23) """
+    if not S:
+        return []
+    else:
+        return core.prefix([core.first(S), core.first(T)], trans2(core.rest(S), core.rest(T)))
 
 def indsubst(x, i, S):
     """ The indexed substition of x for the ith element of S (Exercise 3.23) """
@@ -46,7 +55,7 @@ def subst(x, y, S):
             return S
 
 def lsubst(T, y, S):
-    """ Replace all occurences of y in S with the elements of sequence T """
+    """ Replace all occurences of y in S with the elements of sequence T (Exercise 3.31) """
     if core.first(S) == y:
         if len(S) > 1:
             return cat(T, lsubst(T, y, core.rest(S)))
@@ -59,7 +68,7 @@ def lsubst(T, y, S):
             return S
 
 def add(S):
-    """ Sum all elements of a sequence (Section 3.4) """
+    """ Sum all elements of a sequence (Exercise 3.33) """
     if not S:
         return 0
     else:
@@ -131,3 +140,24 @@ def subpair(X, Y, S):
         return S
     else:
         return subpair(core.rest(X), core.rest(Y), subst(core.first(Y), core.first(X), S))
+
+def map_sin(S):
+    """ Calculate the sine of every value in a sequence (Exercise 3.43) """
+    if not S:
+        return S
+    else:
+        return core.prefix(math.sin(core.first(S)), map_sin(core.rest(S)))
+
+def map_prod(S):
+    """ Calculate the product of every sequence in a sequence (Exercise 3.50) """
+    if not S:
+        return S
+    else:
+        return core.prefix(prod(core.first(S)), map_prod(core.rest(S)))
+
+def vector_prod(S, T):
+    """ Calculate the element-wise product of two sequences of the same length (Exercise 3.51) """
+    if not S:
+        return []
+    else:
+        return map_prod(trans2(S, T))
