@@ -70,6 +70,9 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_seqor_true(self):
         self.assertEqual(['a', 'b'], sequence.seqor([['a', 'b'], [], [], None, ['@', '#']]))
 
+    def test_seqdif(self):
+        self.assertEqual(-3, sequence.seqdif([1, 10, 5, 6, 7]))
+
     def test_seqmin_empty(self):
         self.assertEqual(None, sequence.seqmin([]))
 
@@ -93,6 +96,9 @@ class FuncProgSequenceTestCase(unittest.TestCase):
 
     def test_vector_prod(self):
         self.assertEqual([6, 8, 0], sequence.vector_prod([2, 4, 1], [3, 2, 0]))
+
+    def test_map_dif(self):
+        self.assertEqual([-1, 3, 3, 0, 0], sequence.map_dif([[2, 3], [1, 4, 6], [3], [], [5, 5]]))
 
 def main():
     unittest.main()

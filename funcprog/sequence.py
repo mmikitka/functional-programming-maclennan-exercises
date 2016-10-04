@@ -114,6 +114,15 @@ def seqor(S):
             else:
                 return seqor(core.rest(S))
 
+def seqdif(S):
+    """ Return the difference reduction of a sequence (Exercise 3.39) """
+    if not S:
+        return 0
+    elif core.second(S):
+        return core.first(S) - core.second(S) + seqdif(core.rest(core.rest(S)))
+    else:
+        return core.first(S)
+
 def seqmin(S):
     """ Return the minimum value of a sequence (Exercise 3.40) """
     if not S:
@@ -161,3 +170,17 @@ def vector_prod(S, T):
         return []
     else:
         return map_prod(trans2(S, T))
+
+def map_dif(S):
+    """ Calculate the difference mapping of a sequence (Exercise 3.54) """
+    if not S:
+        return []
+    else:
+        return core.prefix(seqdif(core.first(S)), map_dif(core.rest(S)))
+
+def vector_dif(S, T):
+    """ Calculate the element-wise difference of two sequences (Exercise 3.55) """
+    if not S:
+        return []
+    else:
+        return map_dif(trans2(S, T))

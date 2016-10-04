@@ -13,7 +13,7 @@ def first(S):
     if S:
         return S[0]
     else:
-        return []
+        return None
 
 def second(S):
     return first(rest(S))
