@@ -100,6 +100,30 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_map_dif(self):
         self.assertEqual([-1, 3, 3, 0, 0], sequence.map_dif([[2, 3], [1, 4, 6], [3], [], [5, 5]]))
 
+    def test_seqinterval(self):
+        self.assertEqual([0, 1, 2, 3], sequence.seqinterval(0, 4))
+
+    def test_seqinterval_reverse(self):
+        self.assertEqual([3, 2, 1, 0], sequence.seqinterval(4, 0))
+
+    def test_subseq_1(self):
+        self.assertEqual([0, 1, 2], sequence.subseq([0, 1, 2, 3, 4], 0, 3))
+
+    def test_subseq_2(self):
+        self.assertEqual([2, 3], sequence.subseq([0, 1, 2, 3, 4], 2, 4))
+
+    def test_subseq_3(self):
+        self.assertEqual([], sequence.subseq([0, 1, 2, 3, 4], 3, 3))
+
+    def test_subseq_4(self):
+        self.assertEqual([4, 3, 2], sequence.subseq([0, 1, 2, 3, 4], 5, 2))
+
+    def test_subseq_5(self):
+        self.assertEqual([3, 2, 1, 0], sequence.subseq([0, 1, 2, 3, 4], 4, 0))
+
+    def test_subseq_6(self):
+        self.assertEqual([], sequence.subseq([0, 1, 2, 3, 4], 3, -2))
+
 def main():
     unittest.main()
 

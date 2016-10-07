@@ -184,3 +184,36 @@ def vector_dif(S, T):
         return []
     else:
         return map_dif(trans2(S, T))
+
+def seqinterval(m, n):
+    """ Generate a sequence of numbers from m ... n - 1 (Section 3.6) """
+    if m == n:
+        return []
+    elif m > n:
+        return core.prefix(m - 1, seqinterval(m - 1, n))
+    else:
+        return core.prefix(m, seqinterval(m + 1, n))
+
+def subseq(S, m, n):
+    """ Return a sub-sequence of S from elements m to n (Exercise 3.63) """
+    if m < 0:
+        return subseq(S, len(S) + m, n)
+    elif n < 0:
+        return subseq(S, m, len(S) + n)
+    elif m > len(S):
+        return subseq(S, m - len(S), n)
+    elif n > len(S):
+        return subseq(S, m, n - len(S))
+
+    if m == n:
+        return []
+    elif m > n:
+        if n == 0:
+            return cat(subseq(core.rest(S), m - 1, 0), [core.first(S)])
+        else:
+            return subseq(core.rest(S), m - 1, n - 1)
+    elif m < n:
+        if m == 0:
+            return core.prefix(core.first(S), subseq(core.rest(S), 0, n - 1))
+        else:
+            return subseq(core.rest(S), m - 1, n - 1)
