@@ -124,6 +124,12 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_subseq_6(self):
         self.assertEqual([], sequence.subseq([0, 1, 2, 3, 4], 3, -2))
 
+    def test_seqcollate(self):
+        self.assertEqual([2, 3, 3, 5, 6, 6, 7, 8, 9, 10, 12], sequence.seqcollate([2, 5, 6, 8, 12], [3, 3, 6, 7, 9, 10]))
+
+    def test_seqcollateunique(self):
+        self.assertEqual([2, 3, 5, 6, 7, 8, 9, 10, 12], sequence.seqcollateunique([2, 5, 6, 8, 12], [3, 3, 6, 7, 9, 10]))
+
 def main():
     unittest.main()
 

@@ -217,3 +217,35 @@ def subseq(S, m, n):
             return core.prefix(core.first(S), subseq(core.rest(S), 0, n - 1))
         else:
             return subseq(core.rest(S), m - 1, n - 1)
+
+def seqcollate(S, T):
+    """ Merge two sorted sequences into a sorted sequence (Exercise 3.64) """
+    if not S:
+        return T
+    elif not T:
+        return S
+    elif core.first(S) < core.first(T):
+        return core.prefix(core.first(S), seqcollate(core.rest(S), T))
+    else:
+        return core.prefix(core.first(T), seqcollate(S, core.rest(T)))
+
+def seqcollateunique(S, T):
+    """ Merge two sorted sequences into a sorted sequence with duplicates removed (Exercise 3.65) """
+    if not S:
+        return T
+    elif not T:
+        return S
+    elif core.first(S) == core.first(T):
+        return seqcollateunique(core.rest(S), T)
+    elif core.first(S) < core.first(T):
+        if core.first(S) == core.second(S):
+            return seqcollateunique(core.rest(S), T)
+        else:
+            return core.prefix(core.first(S), seqcollateunique(core.rest(S), T))
+    else:
+        if core.first(T) == core.second(T):
+            return seqcollateunique(S, core.rest(T))
+        else:
+            return core.prefix(core.first(T), seqcollateunique(S, core.rest(T)))
+
+
