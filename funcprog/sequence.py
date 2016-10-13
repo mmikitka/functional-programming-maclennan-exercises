@@ -248,4 +248,19 @@ def seqcollateunique(S, T):
         else:
             return core.prefix(core.first(T), seqcollateunique(S, core.rest(T)))
 
+def seqcollatereduce(S):
+    """ Collation reduction on sequence of sequences (Exercise 3.67) """
+    if not S:
+        return []
+    else:
+        return seqcollate(core.first(S), seqcollatereduce(core.rest(S)))
 
+def seqdedup(S):
+    """ Remove duplicates from a sorted sequence (Exercise 3.68) """
+    if not S:
+        return []
+    else:
+        if core.first(S) != core.second(S):
+            return core.prefix(core.first(S), seqdedup(core.rest(S)))
+        else:
+            return seqdedup(core.rest(S))

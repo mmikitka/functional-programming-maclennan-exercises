@@ -130,6 +130,15 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_seqcollateunique(self):
         self.assertEqual([2, 3, 5, 6, 7, 8, 9, 10, 12], sequence.seqcollateunique([2, 5, 6, 8, 12], [3, 3, 6, 7, 9, 10]))
 
+    def test_seqcollatereduce(self):
+        self.assertEqual([1, 2, 3, 3, 5, 6, 6, 7, 8, 9, 10, 12, 13], sequence.seqcollatereduce([[2, 5, 6, 8, 12], [3, 3, 6, 7, 9, 10], [1, 13]]))
+
+    def test_seqdedup_asc(self):
+        self.assertEqual([1, 3, 4, 5, 8, 9, 10], sequence.seqdedup([1, 1, 3, 4, 5, 8, 8, 9, 10, 10]))
+
+    def test_seqdedup_desc(self):
+        self.assertEqual([10, 9, 8, 5, 4, 3, 1], sequence.seqdedup([10, 10, 9, 8, 8, 5, 4, 3, 1, 1]))
+
 def main():
     unittest.main()
 
