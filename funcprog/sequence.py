@@ -264,3 +264,31 @@ def seqdedup(S):
             return core.prefix(core.first(S), seqdedup(core.rest(S)))
         else:
             return seqdedup(core.rest(S))
+
+def seqdistleft(x, S):
+    """ Distribute left function (Exercise 3.69) """
+    if not S:
+        return []
+    else:
+        return core.prefix(core.prefix(x, core.prefix(core.first(S), [])), seqdistleft(x, core.rest(S)))
+
+def seqdistright(x, S):
+    """ Distribute right function (Exercise 3.69) """
+    if not S:
+        return []
+    else:
+        return core.prefix(core.prefix(core.first(S), core.prefix(x, [])), seqdistright(x, core.rest(S)))
+
+def seqequal(S, T):
+    """ Test whether two sequences are equal (Section 3.7) """
+    if not S or not T:
+        return not S and not T
+    else:
+        return core.first(S) == core.first(T) and seqequal(core.rest(S), core.rest(T))
+
+def seqreverse(S):
+    """ Reverse a sequence (Exercise 3.82) """
+    if not S:
+        return []
+    else:
+        return core.postfix(seqreverse(core.rest(S)), core.first(S))

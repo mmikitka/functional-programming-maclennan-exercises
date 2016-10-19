@@ -139,6 +139,21 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_seqdedup_desc(self):
         self.assertEqual([10, 9, 8, 5, 4, 3, 1], sequence.seqdedup([10, 10, 9, 8, 8, 5, 4, 3, 1, 1]))
 
+    def test_seqdistleft(self):
+        self.assertEqual([[1, 1], [1, 2], [1, 3]], sequence.seqdistleft(1, [1, 2, 3]))
+
+    def test_seqdistright(self):
+        self.assertEqual([[1, 1], [2, 1], [3, 1]], sequence.seqdistright(1, [1, 2, 3]))
+
+    def test_seqequal_true(self):
+        self.assertEqual(True, sequence.seqequal([1, 1, 4, 2, 6], [1, 1, 4, 2, 6]))
+
+    def test_seqequal_false(self):
+        self.assertEqual(False, sequence.seqequal([1, 1, 4, 2, 6], [1, 1, 4, 2, 6, 8]))
+
+    def test_seqreverse(self):
+        self.assertEqual([6, 2, 4, 1, 1], sequence.seqreverse([1, 1, 4, 2, 6]))
+
 def main():
     unittest.main()
 

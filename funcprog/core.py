@@ -4,6 +4,12 @@ def prefix(x, S):
     else:
         return [x]
 
+def postfix(S, x):
+    if S:
+        return S + [x]
+    else:
+        return [x]
+
 def rest(S):
     if len(S) > 1:
         return S[1:]
