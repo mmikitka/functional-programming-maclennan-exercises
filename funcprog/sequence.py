@@ -292,3 +292,14 @@ def seqreverse(S):
         return []
     else:
         return core.postfix(seqreverse(core.rest(S)), core.first(S))
+
+def seqreverseaux(S, T):
+    """ Reverse sequence S onto sequence T """
+    if not S:
+        return T
+    else:
+        return seqreverseaux(core.rest(S), core.prefix(core.first(S), T))
+
+def seqreverse2(S):
+    """ Reverse a sequence in linear time with seqreverseaux (Exercise 3.86) """
+    return seqreverseaux(S, [])
