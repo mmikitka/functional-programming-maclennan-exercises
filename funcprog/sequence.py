@@ -303,3 +303,24 @@ def seqreverseaux(S, T):
 def seqreverse2(S):
     """ Reverse a sequence in linear time with seqreverseaux (Exercise 3.86) """
     return seqreverseaux(S, [])
+
+def cat2(S, T):
+    """ Catenate two sequences using iterative approaches (Exercise 3.97) """
+    if not S:
+        return T
+    else:
+        return cataux1([], S, T)
+
+def cataux1(R, S, T):
+    """ First auxiliary catenate function for iterative purposes """
+    if not S:
+        return cataux2(R, T)
+    else:
+        return cataux1(core.prefix(core.first(S), R), core.rest(S), T)
+
+def cataux2(R, T):
+    """ Second auxiliary catenate function for iterative purposes """
+    if not R:
+        return T
+    else:
+        return cataux2(core.rest(R), core.prefix(core.first(R), T))

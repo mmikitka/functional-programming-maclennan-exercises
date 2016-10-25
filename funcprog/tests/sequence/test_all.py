@@ -157,6 +157,9 @@ class FuncProgSequenceTestCase(unittest.TestCase):
     def test_seqreverse2(self):
         self.assertEqual([6, 2, 4, 1, 1], sequence.seqreverse2([1, 1, 4, 2, 6]))
 
+    def test_cat2(self):
+        self.assertEqual(['a', 'b', 'c', '1', '2', '3'], sequence.cat2(['a', 'b', 'c'], ['1', '2', '3']))
+
 def main():
     unittest.main()
 
