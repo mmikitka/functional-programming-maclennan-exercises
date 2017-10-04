@@ -1,0 +1,3 @@
+- https://lodash.com/
+- http://underscorejs.org/
+- https://github.com/osteele/functional-javascript
